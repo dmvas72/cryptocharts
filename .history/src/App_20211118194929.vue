@@ -56,7 +56,7 @@ export default {
       if(stockObject.stream == "ethusdt@aggTrade") {
         this.price.eth = stockObject.data.p
       }
-      //console.log(stockObject);
+      console.log(stockObject);
     }
   }
 }

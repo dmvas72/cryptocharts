@@ -3,8 +3,9 @@
     <img alt="Vue logo" src="./assets/logo.png">
     <Chart msg="Hello"/>
     <button v-on:click="sendMessage('hello')">Send Message</button>
-    <div>{{ price.eth }}</div>
-    <div>{{ price.ltc }}</div>
+    <li v-for="item in items" :key="item.message">
+    {{ item.message }}
+  </li>
   </div>
 </template>
 
@@ -48,15 +49,12 @@ export default {
 
     this.connection.onmessage = (event) => {
       let stockObject = JSON.parse(event.data);
-      //this.price = stockObject.data.p;
+      this.price = stockObject.data.p;
 
       if(stockObject.stream == "ltcusdt@aggTrade") {
         this.price.ltc = stockObject.data.p
       }
-      if(stockObject.stream == "ethusdt@aggTrade") {
-        this.price.eth = stockObject.data.p
-      }
-      //console.log(stockObject);
+      console.log(stockObject);
     }
   }
 }

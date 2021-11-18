@@ -3,8 +3,7 @@
     <img alt="Vue logo" src="./assets/logo.png">
     <Chart msg="Hello"/>
     <button v-on:click="sendMessage('hello')">Send Message</button>
-    <div>{{ price.eth }}</div>
-    <div>{{ price.ltc }}</div>
+    <div>{{price}}</div>
   </div>
 </template>
 
@@ -16,10 +15,7 @@ export default {
   data() {
     return {
       connection: null,
-      price: {
-        eth: null,
-        ltc: null
-      }
+      price: null
     }
   },
   components: {
@@ -34,7 +30,7 @@ export default {
   },
   created: function() {
     console.log("Starting connection to WebSocket Server")
-    /* wss://stream.binance.com:9443/ws/ethusdt@trade */
+    /***
     this.connection = new WebSocket("wss://stream.binance.com:9443/stream?streams=ltcusdt@aggTrade/ethusdt@aggTrade")
 
     this.connection.onmessage = function(event) {
@@ -48,15 +44,8 @@ export default {
 
     this.connection.onmessage = (event) => {
       let stockObject = JSON.parse(event.data);
-      //this.price = stockObject.data.p;
-
-      if(stockObject.stream == "ltcusdt@aggTrade") {
-        this.price.ltc = stockObject.data.p
-      }
-      if(stockObject.stream == "ethusdt@aggTrade") {
-        this.price.eth = stockObject.data.p
-      }
-      //console.log(stockObject);
+      this.price = stockObject.data.p;
+      console.log(this.price);
     }
   }
 }

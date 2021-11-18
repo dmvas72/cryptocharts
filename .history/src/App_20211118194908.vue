@@ -53,10 +53,7 @@ export default {
       if(stockObject.stream == "ltcusdt@aggTrade") {
         this.price.ltc = stockObject.data.p
       }
-      if(stockObject.stream == "ethusdt@aggTrade") {
-        this.price.eth = stockObject.data.p
-      }
-      //console.log(stockObject);
+      console.log(stockObject);
     }
   }
 }
